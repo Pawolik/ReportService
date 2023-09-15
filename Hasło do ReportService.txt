@@ -1,0 +1,33 @@
+Hasło do ReportService
+
+pfwhdqpvgcbzvuaz
+
+pjcodesprograms@gmail.com
+
+
+
+<add key="HostSmtp" value="smtp.gmail.com"/>
+		<add key="Port" value="587"/>
+		<add key="EnableSsl" value="true"/>
+		<add key="SenderName" value="who is sending"/>
+		<add key="SenderEmail" value="sending email"/>
+		<add key="SenderEmailPassword" value="password"/>
+		<add key="ReciverEmail" value="receiving email"/>
+
+
+
+
+
+<appSettings>
+		<add key="HostSmtp" value="smtp.gmail.com"/>
+		<add key="Port" value="587"/>
+		<add key="EnableSsl" value="true"/>
+		<add key="SenderName" value="PJ"/>
+		<add key="SenderEmail" value="pjcodesprograms@gmail.com"/>
+		<add key="SenderEmailPassword" value="encrypt:pfwhdqpvgcbzvuaz"/>
+		<add key="ReciverEmail" value="pjacewicz474@gmail.com"/>
+
+		<add key="SendHour" value="8"/>
+		<add key="IntervalInMinutes" value="1"/>
+		<add key="SendReports" value="true"/>
+	</appSettings>
