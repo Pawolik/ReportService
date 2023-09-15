@@ -22,8 +22,8 @@ namespace ReportService
     {
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private int SendHour;
-        private int IntervalInMinutes;
+        private int _sendHour;
+        private int _intervalInMinutes;
         private System.Timers.Timer _timer;
         private ErrorRepository _errorRepository = new ErrorRepository();
         private ReportRepository _reportRepository = new ReportRepository();
@@ -54,10 +54,10 @@ namespace ReportService
                 });
 
                 SendHour = Convert.ToInt32(ConfigurationManager.AppSettings["SendHour"]);
-                IntervalInMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["IntervalInMinutes"]);
+                _intervalInMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["IntervalInMinutes"]);
                 SendReports = Convert.ToBoolean(ConfigurationManager.AppSettings["SendReports"]);
 
-                _timer = new System.Timers.Timer(IntervalInMinutes * 60000);
+                _timer = new System.Timers.Timer(_intervalInMinutes * 60000);
 
 
             }
@@ -106,14 +106,14 @@ namespace ReportService
 
         private async Task SendError()
         {
-            var errors = _errorRepository.GetLastErrors(IntervalInMinutes);
+            var errors = _errorRepository.GetLastErrors(_intervalInMinutes);
 
             if (errors == null || !errors.Any())
             {
                 return;
             }
 
-           await _email.Send("Błędy w aplikacji", _htmlEmail.GenerateErrors(errors, IntervalInMinutes), _emailReceiver);
+           await _email.Send("Błędy w aplikacji", _htmlEmail.GenerateErrors(errors, _intervalInMinutes), _emailReceiver);
 
             Logger.Info("Error sent...");
         }
