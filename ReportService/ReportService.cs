@@ -53,7 +53,7 @@ namespace ReportService
                     SenderEmailPassword = DecryptSenderEmailPassword()
                 });
 
-                SendHour = Convert.ToInt32(ConfigurationManager.AppSettings["SendHour"]);
+                _sendHour = Convert.ToInt32(ConfigurationManager.AppSettings["SendHour"]);
                 _intervalInMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["IntervalInMinutes"]);
                 SendReports = Convert.ToBoolean(ConfigurationManager.AppSettings["SendReports"]);
 
@@ -122,7 +122,7 @@ namespace ReportService
         {
             var actualHour = DateTime.Now.Hour;
 
-            if (actualHour < SendHour || !SendReports)
+            if (actualHour < _sendHour || !SendReports)
                 return;
 
             var report = _reportRepository.GetLastNotSentReport();
